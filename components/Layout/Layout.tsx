@@ -1,6 +1,7 @@
-import Head from "next/head";
-import styles from "../../styles/Layout.module.css";
 import { FC } from "react";
+import Head from "next/head";
+import { Header, Footer } from "../";
+import styles from "../../styles/Layout.module.css";
 
 type LayoutProps = {
   title: string;
@@ -21,7 +22,10 @@ export const Layout: FC<LayoutProps> = ({
         <meta name="description" content={description} />
         <meta name="keywords" content={keywords} />
       </Head>
+
+      <Header />
       <div className={styles.container}>{children}</div>
+      <Footer />
     </div>
   );
 };
