@@ -1,7 +1,8 @@
 import { FC } from "react";
 import Head from "next/head";
-import { Header, Footer } from "../";
-import styles from "../../styles/Layout.module.css";
+import { useRouter } from "next/router";
+import { Header, Footer, Showcase } from "../";
+import styles from "@/styles/Layout.module.css";
 
 type LayoutProps = {
   title: string;
@@ -15,6 +16,7 @@ export const Layout: FC<LayoutProps> = ({
   description = "Find the latest DJ and other musical events",
   children,
 }) => {
+  const router = useRouter();
   return (
     <div>
       <Head>
@@ -24,6 +26,7 @@ export const Layout: FC<LayoutProps> = ({
       </Head>
 
       <Header />
+      {router.pathname === "/" && <Showcase />}
       <div className={styles.container}>{children}</div>
       <Footer />
     </div>

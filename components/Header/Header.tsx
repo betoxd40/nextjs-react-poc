@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "../../styles/Header.module.css";
+import styles from "@/styles/Header.module.css";
 import { FC } from "react";
 
 type HeaderProps = {};
