@@ -6,7 +6,7 @@ type EventsProps = {
   events: any;
 };
 
-const Events: FC<EventsProps> = ({ events }) => {
+const EventsPage: FC<EventsProps> = ({ events }) => {
   return (
     <>
       <Layout title="DJ Events | Find the hottest parties">
@@ -22,10 +22,10 @@ const Events: FC<EventsProps> = ({ events }) => {
 };
 
 export async function getStaticProps() {
-  const res = await fetch(`${API_URL}/api/events`);
+  const res = await fetch(`${API_URL}/events?_sort=date:ASC&_limit=3 `);
   const events = await res.json();
 
-  return { props: { events: events.slice(0, 3) }, revalidate: 1 };
+  return { props: { events }, revalidate: 1 };
 }
 
-export default Events;
+export default EventsPage;

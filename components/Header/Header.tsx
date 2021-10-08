@@ -1,6 +1,7 @@
-import Link from "next/link";
-import styles from "@/styles/Header.module.css";
 import { FC } from "react";
+import Link from "next/link";
+import { Search } from "@/components";
+import styles from "@/styles/Header.module.css";
 
 type HeaderProps = {};
 
@@ -12,6 +13,9 @@ export const Header: FC<HeaderProps> = ({}) => {
           <a>DJ Events</a>
         </Link>
       </div>
+
+      <Search />
+
       <nav>
         <ul>
           <li>

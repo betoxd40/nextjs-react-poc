@@ -8,7 +8,6 @@ type HomeProps = {
 };
 
 const Home: FC<HomeProps> = ({ events }) => {
-  console.log("🚀 ~ file: index.tsx ~ line 10 ~ events", events);
   return (
     <>
       <Layout title="DJ Events | Find the hottest parties">
@@ -31,7 +30,7 @@ const Home: FC<HomeProps> = ({ events }) => {
 };
 
 export async function getStaticProps() {
-  const res = await fetch(`${API_URL}/api/events`);
+  const res = await fetch(`${API_URL}/events?_sort=date:ASC`);
   const events = await res.json();
 
   return { props: { events }, revalidate: 1 };
