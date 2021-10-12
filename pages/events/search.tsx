@@ -5,11 +5,11 @@ import Link from "next/link";
 import { Layout, EventItem } from "@/components";
 import { API_URL } from "@/config";
 
-type EventsProps = {
+type SearchPageProps = {
   events: any;
 };
 
-const SearchPage: FC<EventsProps> = ({ events }) => {
+const SearchPage: FC<SearchPageProps> = ({ events }) => {
   const router = useRouter();
   return (
     <>

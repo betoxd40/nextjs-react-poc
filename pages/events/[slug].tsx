@@ -1,18 +1,36 @@
 import { FC } from "react";
 import { FaPencilAlt, FaTimes } from "react-icons/fa";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Image from "next/image";
+import { ToastContainer, toast } from "react-toastify";
 import { Layout } from "@/components";
 import { API_URL } from "@/config";
 import styles from "@/styles/Event.module.css";
 import { formatDate } from "@/utils";
+import "react-toastify/dist/ReactToastify.css";
 
 type EventProps = {
   event: any;
 };
 
 const EventPage: FC<EventProps> = ({ event }) => {
-  const deleteEvent = () => null;
+  const router = useRouter();
+
+  const deleteEvent = async () => {
+    if (confirm("Are you sure ?")) {
+      const res = await fetch(`${API_URL}/events/${event.id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message);
+      } else {
+        router.push("/events");
+      }
+    }
+  };
 
   return (
     <Layout title="DJ Events | Find the hottest parties">
@@ -32,6 +50,7 @@ const EventPage: FC<EventProps> = ({ event }) => {
           {formatDate(event.date)} at {event.time}
         </span>
         <h1>{event.name}</h1>
+        <ToastContainer />
         {event.image && (
           <div className={styles.image}>
             <Image
