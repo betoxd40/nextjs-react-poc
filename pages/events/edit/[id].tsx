@@ -6,7 +6,7 @@ import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_URL } from "@/config";
-import { Layout } from "@/components";
+import { Layout, Modal, ImageUpload } from "@/components";
 import styles from "@/styles/Form.module.css";
 
 type EditEventPageProps = {
@@ -17,6 +17,7 @@ const EditEventPage: FC<EditEventPageProps> = ({ event }) => {
   const [imagePreview, setImagePreview] = useState(
     event.image ? event.image.formats.thumbnail.url : null
   );
+  const [showModal, setShowModal] = useState(false);
   const [values, setValues] = useState({
     name: event.name,
     performers: event.performers,
@@ -54,6 +55,13 @@ const EditEventPage: FC<EditEventPageProps> = ({ event }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
+  };
+
+  const imageUploaded = async () => {
+    const res = await fetch(`${API_URL}/events/${event.id}`);
+    const data = await res.json();
+    setImagePreview(data.image.formats.thumbnail.url);
+    setShowModal(false);
   };
 
   return (
@@ -147,8 +155,17 @@ const EditEventPage: FC<EditEventPageProps> = ({ event }) => {
         </div>
       )}
       <div>
-        <button className="btn-secondary">Set Image</button>
+        <button className="btn-secondary" onClick={() => setShowModal(true)}>
+          Set Image
+        </button>
       </div>
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        title={"This is the title"}
+      >
+        <ImageUpload eventId={event.id} imageUploaded={imageUploaded} />
+      </Modal>
     </Layout>
   );
 };

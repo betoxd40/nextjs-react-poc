@@ -4,3 +4,6 @@ export * from "./Header";
 export * from "./Showcase";
 export * from "./EventItem";
 export * from "./Search";
+export * from "./Modal";
+export * from "./ImageUpload";
+export * from "./Pagination";
