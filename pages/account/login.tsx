@@ -19,6 +19,10 @@ const Login: FC<LoginProps> = ({}) => {
     login({ email, password });
   };
 
+  useEffect(() => {
+    error && toast.error(error);
+  }, [error]);
+
   return (
     <Layout title="User Login">
       <div className={styles.auth}>
